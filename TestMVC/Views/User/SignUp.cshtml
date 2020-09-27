@@ -1,0 +1,239 @@
+﻿@model TestMVC.Models.UserViewModel
+
+@{
+    ViewBag.Title = "SignUp";
+}
+
+
+
+
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<link href="~/Content/loginSignup.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' rel="stylesheet">
+<style>
+    #btnCancel {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #2ecc71;
+        border: 2px solid red;
+        padding: 14px 40px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+        margin-top:-70px;
+        margin-right: 70px;
+
+        float: right;
+        /*margin-top: 20px;*/
+    }
+
+        #btnCancel:hover {
+            background: red;
+        }
+
+   
+            
+    
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+
+                <form class="box" id="UserForm" method="post">
+                    <div>
+                        @*<b id="important"></b>*@
+                        
+                        <b>@ViewBag.userName</b>
+                       
+
+                    </div>
+
+                    <h1>Signup</h1>
+                   
+                   
+                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", id = "txtFirstName", placeholder="First Name" })
+                    <b>@Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger" })</b>
+
+                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", id = "txtLastName", placeholder = "Last Name" })
+                    <b>@Html.ValidationMessageFor(model => model.LastName, null, new { @class = "text-danger" })</b>
+                   
+                     @Html.TextBoxFor(model => model.Email, new { @class = "form-control", id = "txtEmail", placeholder = "Email" })
+                    <b>@Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })</b>
+                   
+                     @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", id = "txtUserName", placeholder = "UserName" })
+                    <b>@Html.ValidationMessageFor(model => model.UserName, null, new { @class = "text-danger" })</b>
+                    <b id="message"></b>
+                   
+
+                    @Html.TextBoxFor(model => model.Password, new { @autocomplete = "off", placeholder = "Password", @type = "password", @class = "toggle-password", id = "txtPwd" })
+                    <b>@Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })</b>
+                    
+                    <span toggle="#txtPwd" class="fa fa-fw fa-eye field-icon toggle-password" style="cursor:pointer;margin-right:100px;float:right;margin-top:-50px;"></span>
+
+                    @*@Html.TextBoxFor(model => model.Password, new { @class = "form-control", id = "txtPwd" })*@
+                   
+                    <div class="wrap-input100 validate-input m-b-16" style="margin-left:60px">
+
+                        @*
+            Note: This is reCAPTCHA version 2
+            Note this key is registered by awaisfarooq00125@gmail.com
+            Note: For get captcha for local host, just write localhost without portname in domain box e.g localhost
+                        *@
+                        <div class="g-recaptcha" data-sitekey="6LfL7rUZAAAAAElLNSp5qs6WIS0Sl8sFjQ28mCvD"></div>
+                        <b id="Captcha" style="color: red; font-size: 12px;"></b>
+                    </div>
+                    
+                        <button type="submit" id="btnSave">Save</button>
+                        <button type="reset" id="btnCancel">Cancel</button>
+                   
+                    <div class="col-md-12">
+                        <ul class="social-network social-circle">
+                            <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" class="icoGoogle" title="Google +"><i class="fab fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script type="text/javascript">
+
+    $(".toggle-password").click(function () {
+
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+
+    $(document).ready(function () {
+        //$('#UserForm').submit(function (e) {
+        //    e.preventDefault();
+        //    if (!$("#UserForm").valid()) {
+        //        return false;
+        //    }
+        //    saveUser();
+        //});
+        $('#UserForm').submit(function (e) {
+            e.preventDefault();
+            if (!$("#UserForm").valid()) {
+                return false;
+            }
+            var check = 0;
+            var response = grecaptcha.getResponse();
+            if (response.length <= 0) {
+                $('#Captcha').html('Captcha is required');
+                check += 1;
+            }
+            if (check > 0) {
+
+                return false;
+                
+            }
+            saveUser();
+
+        });
+        
+        $('#btnCancel').click(function () {
+            ResetUserForm();
+        });
+
+       
+
+        function validateEmail() {
+            var email = $('#txtEmail').val();
+            var regex = /^\w+([-+.']\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+            if (regex.test(email)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        $('#txtEmail').keyup(function () {
+            if (validateEmail()) {
+
+                $('#txtEmail').css("border", "2px solid #3498db");
+                //$('#important').html("<p class='text-success'>Valid Email</p>");
+            }
+            else {
+                $('#txtEmail').css("border", "2px solid red");
+                //$('#important').html("<p class='text-danger'>Invalid Email</p>");
+            }
+        });
+
+
+        function saveUser() {
+            var formData = new FormData();
+            //formData.append("UserId", $('#txtUserId').val());
+            formData.append("FirstName", $('#txtFirstName').val());
+            formData.append("LastName", $('#txtLastName').val());
+            formData.append("Email", $('#txtEmail').val());
+            formData.append("UserName", $('#txtUserName').val());
+            formData.append("Password", $('#txtPwd').val());
+            formData.append("DOB", $('#txtDOB').val());
+       
+            $.ajax({
+                async: true,
+                url: '/User/SignUp',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+              
+                data: formData,
+                success: function (data) {
+                    if (data.success === true && data.UserStatus == true) {
+
+                        alert(data.message);
+                        ResetUserForm();
+                    }
+                    else {
+                        $('#message').html('<span style="color:red;font-size:16px">' + data.user + '</span>');
+                    }
+                },
+                error: function () {
+                    alert("There is some problem to process your request!");
+                }
+            });
+        }
+
+        function ResetUserForm() {
+            $('input[type="text"]').each(function () {
+                $(this).val('');
+            });
+            $('#txtPwd').val('');
+            grecaptcha.reset();
+            $('#message').hide();
+            $('#Captcha').hide();
+            
+         
+        }
+
+    });
+
+
+    
+   
+
+</script>

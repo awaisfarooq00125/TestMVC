@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        .box{
+            width:200px;
+            height:200px;
+            background-color:orange;
+        }
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Hell0</h2>
+        <p>Hello! This is paragraph</p>
+    </div>
+    <div class="box1">
+        <h3>Hell0</h3>
+        <h3>Hello! This is paragraph</h3>
+        <h3>Hello! This is paragraph</h3>
+    </div>
+</body>
+</html>
+
+<script src="Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#box').click(function () {
+            alert('This is div element');
+        });
+        $('h2').click(function () {
+            alert('This is h2 tag');
+        });
+        $('p').click(function (event) {
+            event.stopPropagation();//this is used to stop another alert when this alert display.
+            alert('This is p tag ' + event.isPropagationStopped());//isPropagationStopped is used to tell that stopPropagation is applied on tag or not and give result true or false
+        });
+
+
+        //below code for event.data (used for pass data in event)
+        $('h3').each(function (i) {
+            $(this).on("click", { value: i }, function (event) {
+                alert(event.data.value);
+            })
+        })
+    });
+</script>

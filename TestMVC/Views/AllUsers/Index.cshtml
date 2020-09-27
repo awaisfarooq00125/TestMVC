@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "GetAllUsers";
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Content/jquery%20ui.css" rel="stylesheet" />
+<script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '/AllUsers/GetAllUsers',
+            method: 'POST',
+            dataType: 'json',
+
+            success: function (data) {
+                var dataTableInstance = $('#dataTable').DataTable({
+                    data: data,
+                    columns: [
+
+                        { 'data': 'UserId' },
+                        { 'data': 'FirstName' },
+                        { 'data': 'LastName' },
+                        { 'data': 'Email' },
+                        { 'data': 'UserName' }
+                    ]
+
+                });
+            }
+
+        });
+    });
+</script>
+
+<div style="width:1000px;border:1px solid black;padding:3px">
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>UserName</th>
+              
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>UserName</th>
+                
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+

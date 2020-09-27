@@ -1,0 +1,117 @@
+﻿@model IEnumerable<TestMVC.Models.UserViewModel>
+@*<table style="width:100%" id="tblUserList">
+
+        <thead>
+            <tr>
+
+
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    UserName
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    <td>
+                        @item.FirstName
+                    </td>
+                    <td>
+                        @item.LastName
+                    </td>
+                    <td>
+
+                        @item.Email
+                    </td>
+                    <td>
+                        @item.UserName
+                    </td>
+
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>*@
+<div style="width:1000px;border:1px solid black;padding:3px">
+    <table id="dataTable1">
+        <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>UserName</th>
+            </tr>
+        </thead>
+
+    </table>
+</div>
+
+@section Scripts{
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $.ajax({
+            url: '/User/GetList',
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                $('#dataTable1').dataTable({
+                    data: data,
+                    columns: [
+
+                        { 'data': 'FirstName' },
+                        { 'data': 'LastName' },
+                        { 'data': 'Email' },
+                        { 'data': 'UserName' }
+                    ]
+                });
+            }
+
+        });
+
+    });
+    //$(document).ready(function () {
+    //    ListUsers();
+    //});
+
+    //function ListUsers() {
+    //    $.ajax({
+    //        async: true,
+    //        data: 'GET',
+    //        dataType: 'HTML',
+    //        contentType: false,
+    //        processData: false,
+    //        url: '/User/List',
+    //        success: function (data) {
+    //            $('#tblUserList').html(data);
+
+    //        },
+    //        error: function () {
+    //            alert("There is some problem to show user list");
+    //        }
+    //    })
+    //}
+
+
+</script>
+
+
+
+}

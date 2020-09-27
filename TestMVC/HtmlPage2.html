@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+   
+    <link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' rel="stylesheet">
+    <style>
+        .field-icon {
+            float: right;
+            margin-left: -25px;
+            margin-top: -25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            padding-top: 50px;
+            margin: auto;
+        }
+        input.invalid, textarea.invalid {
+            border: 2px solid red;
+        }
+
+        input.valid, textarea.valid {
+            border: 2px solid green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form class="form-horizontal" method="" action="">
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Email</label>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" name="email" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Password</label>
+
+                               
+                                <div class="col-md-6">
+                                    <input id="password-field"  type="password" class="toggle-password" name="password" value="secret">
+                                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                </div>
+                            </div>
+
+                            <input  type="email" class="form-control"  id="txtEmail" value="">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+    $(".toggle-password").click(function () {
+       
+        $(document).ready(function () {
+
+            $('#txtEmail').on('input', function () {
+                var input = $(this);
+                var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                var is_email = re.test(input.val());
+                if (is_email) { input.removeClass("invalid").addClass("valid"); }
+                else { input.removeClass("valid").addClass("invalid"); }
+            });
+            $('#btnSave').click(function () {
+                if (!$("#UserForm").valid()) {
+                    return;
+                }
+
+                saveUser();
+                $('#txtEmail').keyup(function () {
+                    if (validateEmail()) {
+                        $('#txtEmail').css("border", "2px solid orange");
+                    }
+                    else {
+                        $('#txtEmail').css("border", "2px solid red");
+                    }
+                });
+
+            });
+
+
+
+
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    });
+</script>

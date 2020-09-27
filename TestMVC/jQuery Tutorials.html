@@ -1,0 +1,477 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        #box{
+            border:2px solid black;
+            padding:30px;
+            margin:20px;
+             
+        }
+         .AddClass{
+             background-color:orange;
+        }
+         #Test{
+             background-color:pink;
+             padding:5px;
+         }
+         .text{
+             color:orange;
+         }
+         .red{
+             color:red;
+         }
+         #box1{
+         background-color:orange;
+         color:white;
+         width:200px;
+         height:200px;
+         position:relative;
+         }
+        #main-outer{
+            background-color:pink;
+            width:300px;
+        }
+        #outer{
+            background-color:green;
+            margin-left:10px;
+            width:280px;
+        }
+        #inner {
+            background-color: orange;
+            margin-left: 8px;
+            width: 250px;
+        }
+        #main-outer1 {
+            background-color: pink;
+            width: 300px;
+        }
+
+        #outer1 {
+            background-color: green;
+            margin-left: 10px;
+            width: 280px;
+        }
+
+        #inner1 {
+            background-color: orange;
+            margin-left: 8px;
+            width: 250px;
+        }
+
+        #main-outer2 {
+            background-color: pink;
+            width: 300px;
+        }
+
+        #outer2 {
+            background-color: green;
+            margin-left: 10px;
+            width: 280px;
+        }
+
+        #inner2 {
+            background-color: orange;
+            margin-left: 8px;
+            width: 250px;
+        }
+       #first{
+           width:300px;
+           height:150px;
+           background-color:orange;
+       }
+        #second {
+            width: 300px;
+            height: 150px;
+            background-color: yellow;
+        }
+        #Mouseresults{
+            width:100px;
+            height:100px;
+            background-color:greenyellow;
+        }
+        /*#mouseBox{
+            width:50px;
+            height:50px;
+            background-color:yellow;
+        }*/
+        #mouseEventType {
+            width: 200px;
+            height: 200px;
+            background-color: gold;
+        }
+        #mouseEventTypeWhich {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+        #mouseEventTarget {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+            
+    </style>
+</head>
+<body>
+
+    <!--Below code is used for filtering methods-->
+    <div id="first">
+        <p class="test">hello this is filtering methods</p>
+        <p>hello this is <span> of filtering</span> methods</p>
+    </div>
+    <ul>
+        <li>Orange</li>
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Grapes</li>
+    </ul>
+    <div id="second">
+        <p>In Informatics, dummy data is benign information that does not contain any useful data,</p>
+        <p> but serves to reserve space where real data is nominally present.</p>
+    </div>
+
+    <div id="box" class="text" >
+        <h2>but serves to reserve space where real data is nominally present. </h2>
+        <p>In Informatics, dummy data is benign information that does not contain any useful data,
+        but serves to reserve space where real data is nominally present. </p>
+        
+    </div>
+    <br />
+    <div id="box1">
+       
+            Hello!In Informatics, dummy data is benign information that does not contain any useful data,
+        
+    </div>
+   
+    <div id="box2">
+        In Informatics, dummy data is benign information that does not contain any useful data,
+       
+    </div>
+    <br />
+    <!--Below code is used for ancestors methods-->
+    <div id="main-outer">
+        <h2>Main Outer</h2>
+        <div id="outer" style="position:relative">
+            <h2>Outer</h2>
+            <div id="inner">
+                <h2 id="child-head">Inner</h2>
+                <div>A</div>
+                <div>B</div>
+                <div id="child-C">C</div>
+                <div>D</div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <!--Below code is used for descendants methods-->
+    <div id="main-outer1">
+        <h2>Main Outer</h2>
+        <div id="outer1" style="position:relative">
+            <h2>Outer</h2>
+            <div id="inner1">
+                <h2 id="child-head1">Inner</h2>
+                <div>A</div>
+                <div>B</div>
+                <div id="child-C1">C</div>
+                <div>D</div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!--Below code is used for siblings methods-->
+    <div id="main-outer2">
+        <h2>Main Outer</h2>
+        <div id="outer2" style="position:relative">
+            <h2>Outer</h2>
+            <div id="inner2">
+                <h2 id="h2">Inner</h2>
+                <div>A</div>
+                <div>B</div>
+                <div id="child-C2">C</div>
+                <div>D</div>
+                <div id="child-E2">E</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--below code <ul> is for each method-->
+    <ul class="ul">
+        <li>apple</li>
+        <li>orange</li>
+    </ul>
+  
+    <div id="Mouseresults"></div>
+    <div id="mouseBox"></div>
+    <div id="mouseEventType"></div>
+    <h4></h4>
+    <div id="mouseEventTypeWhich"></div>
+    <h5></h5>
+
+    <div id="mouseEventTarget">
+        <h3>Hello</h3>
+        <p>this is paragraph</p>
+    </div>
+    <h2></h2>
+
+
+    <input type="text" id="inputBox"/>
+
+    <a href="www.google.com" id="preventDefault">Prevent default</a>
+    <a href="www.google.com">Google</a>
+    
+    <button type="button" id="btnAdd" >Add Class</button>
+    <button type="button" id="btnRemove">Remove Class</button>
+    <button type="button" id="btnToggleClass">Toggle Class</button>
+    <button type="button" id="btnAppend">Append</button>
+    <button type="button" id="btnPrepend">Prepend</button>
+    <button type="button" id="btnBefore">Before</button>
+    <button type="button" id="btnAfter">After</button>
+    <button type="button" id="btnEmpty">Empty</button>
+    <button type="button" id="btnRemovediv">Remove</button>
+    <button type="button" id="btnAppendTo">Append To</button>
+    <button type="button" id="btnPrependTo">Prepend To</button>
+    <button type="button" id="btnClone">Clone</button>
+    <button type="button" id="btnReplace">Replace</button>
+    <button type="button" id="btnWrap">Wrap</button>
+    <button type="button" id="btnUnWrap">UnWrap</button>
+    <br />
+    <button type="button" id="btnWrapAll">WrapAll</button>
+    <button type="button" id="btnInnerWrap">Inner wrap</button>
+    <button type="button" id="btnWidth">Width</button>
+    <button type="button" id="btnHasClass">hasClass</button>
+
+    <button type="button" id="btnHide">hide</button>
+    <button type="button" id="btnShow">Show</button>
+
+    <button type="button" id="btnToggle">Toggle</button>
+    <button type="button" id="btnFadeOut">Fade out</button>
+    <button type="button" id="btnFadeIn">Fade in</button>
+    <button type="button" id="btnFadeToggle">Fade Toggle</button>
+    <button type="button" id="btnFadeTo">Fade To</button>
+    <button type="button" id="btnSlideUp">Slide up</button>
+    <button type="button" id="btnSlideDown">Slide Down</button>
+    <button type="button" id="btnSlideToggle">Slide Toggle</button>
+
+    <button type="button" id="btnAnimate">Animate</button>
+    <button type="button" id="btnStop">Stop</button><br />
+    <button type="button" id="btnChaining">Method Chaining</button>
+
+</body>
+</html>
+
+<script src="Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#preventDefault').click(function (event) {
+            event.preventDefault();
+            var a = event.isDefaultPrevented();
+            $('h2').html(a);
+        });
+
+        $('#mouseEventTarget').on('click', function (event) {
+            $('h2').html("Target Element: " + event.target.nodeName);
+        })
+
+        $('#mouseEventTypeWhich').on('mouseover mouseout mousedown', function (event) {
+            $('h5').html(event.type + ":" + event.which);
+        })
+        $('#inputBox').on('keydown', function (event) {
+            $('h5').html(event.type + ":" + event.which);
+        })
+
+        $('#mouseEventType').on('click dblclick mouseover mouseout', function (event) {
+            $('h4').html('Event:' + event.type);
+        })
+
+        $(document).mousemove(function (event) {
+            $('#Mouseresults').text('X =' + event.pageX + 'Y =' + event.pageY);
+            var x = event.pageX;
+            var y = event.pageY;
+            $('#mouseBox').offset({ top: y, left: x });
+        });
+
+        $('.ul li').each(function () {
+            $(this).text('hello');
+        })
+
+        $('p').has('span').css("background", "blue");
+
+        $('p').click(function () {
+            if($('p').parent().is('div')){
+
+                $(this).css("background","brown")
+            };
+        });
+
+
+        //Below code for filtering methods
+
+        //$('p').first().css("background", "gold");
+        //$('#second p').first().css("background", "gold");
+       // $('ul li').last().css("background", "gold");
+        //$('ul li').eq(2).css("background", "gold");
+        //$('p').filter('#first').css("background", "red");
+        //$('p#test').css("background", "red");
+       /// $('#first p').not('.test').css("background", "red");
+        $('ul li').slice(2).css("background", "gold");// slice select here all from 2
+
+        //Below code for siblings methods
+       // $('#child-C2').siblings().css("background", "yellow");
+        //$('#child-C2').siblings('h2').css("background", "yellow");
+        //$('#child-C2').prev().css("background", "yellow");
+        //$('#child-C2').next().css("background", "yellow");
+        //$('#child-C2').nextAll().css("background", "yellow");
+        //$('#child-C2').prevAll().css("background", "yellow");
+       // $('#child-C2').nextUntil('#child-E2').css("background", "yellow");
+        $('#child-C2').prevUntil('#h2').css("background", "yellow");
+
+        //Below code for descendants methods
+        //$('#inner1').children().css("background", "yellow");//children do not target to grand children but find can target to grandchildren
+        //$('#inner1').children('#child-C1').css("background", "yellow");
+        $('#inner1').find('#child-C1').css("background", "yellow");
+
+
+        //Below code for ancestors methods
+       $('#child-C').closest('div').css("background", "blue");
+       // $('#child-C').offsetParent().css("background", "red");
+        //$('#child-C').parent().css("background", "pink");
+       // $('#child-C').parentsUntil('#main-outer').css("background", "yellow");
+
+        $(window).scrollTop();
+
+        $('#btnAdd').on('click', function () {
+            $('#box').addClass('AddClass');
+        });
+        $('#btnRemove').on('click', function () {
+            $('#box').removeClass('AddClass');
+        });
+        $('#btnToggleClass').on('click', function () {
+            $('#box').toggleClass('AddClass');
+        });
+        $('#box').on({
+            'click': function () {
+                $(this).css("background", "yellow");
+            },
+            'mouseover': function () {
+                $(this).css("font-weight", "bold");
+            },
+            'mouseout': function () {
+                $(this).css("font-weight", "");
+            }
+        });
+        $('#btnAppend').click(function () {
+            $('#box').append('<h2>Append Text</h2>');
+        });
+        $('#btnPrepend').click(function () {
+            $('#box').prepend('<h2>Prepend Text</h2>');
+        });
+        $('#btnBefore').click(function () {
+            $('#box').before('<h2>Before Text</h2>');
+        });
+        $('#btnAfter').click(function () {
+            $('#box').after('<h2>After Text</h2>');
+        });
+        $('#btnEmpty').click(function () {
+            $('#box').empty();
+        });
+        $('#btnRemovediv').click(function () {
+            $('#box').remove('click');
+        });
+        $('#btnAppendTo').click(function () {
+            $('<h2>Append Text</h2>').appendTo('#box');
+        });
+        $('#btnPrependTo').click(function () {
+            $('<h2>PreAppend Text</h2>').prependTo('#box');
+        });
+        $('#btnClone').click(function () {
+            $('#box2').append("#box h2").clone();
+        });
+        $('#btnReplace').click(function () {
+            //$('#box p:first').replaceWith('Replace text');
+            //$('#box p:nth-child(2)').replaceWith('Replace text');
+            $('#box p').replaceAll('Replace text');
+        });
+        $('#btnWrap').click(function () {
+            $('#box p').wrap('<div id="Test"></div>');
+        });
+        $('#btnUnWrap').click(function () {
+            $('#box p').unWrap();
+        });
+        $('#btnWrapAll').click(function () {
+            $('p').wrapAll('<div id="Test"></div>');
+
+        });
+        $('#btnInnerWrap').click(function () {
+            $('#box h2').wrapInner('<span class="red"></span>');
+        });
+        $('#btnWidth').click(function () {
+            $('#box').width("400px");
+        });
+        $('#btnHasClass').click(function () {
+            var x = $('#box').hasClass('text');
+            if(x == true)
+            {
+                console.log('Yes');
+            }
+            else
+            {
+                console.log('No');
+            }
+        });
+        $('#btnHide').click(function () {
+            $('#box p').hide('3000');
+        });
+        $('#btnShow').click(function () {
+            $('#box p').show('5000');
+        });
+        $('#btnToggle').click(function () {
+            $('#box p').toggle();
+        });
+
+        $('#btnFadeOut').click(function () {
+            $('#box').fadeOut("slow");
+        });
+        $('#btnFadeIn').click(function () {
+            $('#box').fadeIn("fast");
+        });
+        $('#btnFadeToggle').click(function () {
+            $('#box').fadeToggle('3000');
+        });
+        $('#btnFadeTo').click(function(){
+            $('#box').fadeTo('3000', 0.5);//value must be between 0 and 1(This value means how much you want to trasparent)
+        });
+        $('#btnSlideUp').click(function () {
+            $('#box').slideUp('3000');
+        });
+        $('#btnSlideDown').click(function () {
+            $('#box').slideDown('3000');
+        });
+        $('#btnSlideToggle').click(function () {
+            $('#box').slideToggle('3000');
+        });
+        $('#btnAnimate').click(function () {
+            //$('#box1').animate({width:'1000px'})
+            $('#box1').animate({
+                left: '750px',
+                width: '3000px',
+                borderWidth:'5px'
+            });
+            //$('#box1').animate({ left: '150px' },"slow");
+            //$('#box1').animate({ top: '150px' });
+        });
+        $('#btnStop').click(function () {
+            $('#box1').stop(true,true);//first true means all the animation stop at once, 2nd true means click on stop go to final position.
+        });
+        $('#btnChaining').click(function () {
+            $('#box1').css("background", "pink").slideUp().slideDown();
+        });
+
+
+    });
+    
+</script>

@@ -1,0 +1,227 @@
+﻿<style>
+    .set-img {
+        font-family: "Open Sans",Arial,Helvetica,Sans-Serif;
+    }
+
+    .table tr td {
+        border: 0 !important;
+    }
+
+    .custome-class-form h4 {
+        font-weight: bold;
+        color: #000;
+    }
+
+    .custome-class-form label {
+        font-weight: bold !important;
+        color: #000;
+    }
+
+    .table tr .V__align {
+        vertical-align: bottom !important;
+    }
+
+    .width {
+        width: 195px;
+    }
+
+    .select2-container {
+        width: 221px !important;
+    }
+</style>
+@model TestMVC.Models.RegionViewModel
+<div class="widget-body no-padding" style="overflow-x:hidden;margin-top:-20px;padding:0px">
+    @using (Html.BeginForm("InsertUpdateRegion", "Region", FormMethod.Post, new { id = "popupForm", @class = "smart-form custome-class-form", @novalidate = "novalidate", enctype = "multipart/form-data" }))
+    {
+        <fieldset>
+            <div class="alertDiv">
+            </div>
+            <div class="row">
+                <br />
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <label>Region Name</label>
+
+                    <input type="hidden" id="HiddenRegionId" name="HiddenRegionId" value="@Model.RegionId" />
+                    <input type="hidden" id="HiddenRegionName" name="HiddenRegionName" value="@Model.RegionName" />
+
+                    <label class="input">
+
+                        @Html.TextBoxFor(a => a.RegionName, new { @placeholder = "Region Name", @maxlength = "100", @class = "form-control" })
+
+                    </label>
+                </div>
+                <div class="col-md-3"></div>
+                @*<div class="col-md-6">
+                        <table class="" style="width: 100% !important">
+                            <tr>
+                                <td style="width: 100% !important;">
+                                    <div style="padding: 3px">
+                                        <label>Select Region</label>
+                                        <label class="select">
+                                            @Html.DropDownListFor(model => model.RegionId, Enumerable.Empty<SelectListItem>(), new { @style = "221px !important" })
+                                        </label>
+                                    </div>
+                                </td>
+                                <td style="width: 2%;margin-left: -5px;padding-top:8.7px;">
+                                    <a href="/region/regionindex" target="_blank" class="btn btn-primary" style="margin-top:9.5px;color:#fff;padding:4.1px;margin-left: -4px;background-color:#aaaaaa !important;border-color:#aaaaaa !important;" title="Add New Region">
+                                        <i class="glyphicon glyphicon-plus" style="margin-left:2px"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>*@
+            </div>
+
+        </fieldset>
+        <footer>
+            <button type="submit" id="btn_Save" class="btn btn-labeled btn-primary pull-right">
+                SAVE
+            </button>
+        </footer>
+    }
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var $validation = $('#popupForm').validate({
+
+            rules: {
+                RegionName: {
+                    required: true
+                }
+            },
+            messages: {
+                RegionName: {
+                    required: 'Region is required'
+                },
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+
+            }
+
+        })
+
+
+        if ($('#RegionId').val() > 0) {
+            /////////------Address--------------/////////
+            if ($('#RegionId').find("option[value='" + $('#HiddenRegionId').val() + "']").length) {
+                $('#RegionId').val($('#HiddenRegionId').val()).trigger('change');
+            } else {
+                // Create a DOM Option and pre-select by default
+                var newOption = new Option($('#HiddenRegionName').val(), $('#HiddenRegionId').val(), true, true);
+                // Append it to the select
+                $('#RegionId').append(newOption).trigger('change');
+            }
+        }
+        else {
+            $('#Gender').val(null).trigger('change');
+        }
+
+        var pageSize = 20;
+        var optionListUrl = '@Url.Action("GetRegionOptionList", "Combolist")';
+
+        $('#RegionId').select2({
+            ajax: {
+                delay: 150,
+                url: optionListUrl,
+                dataType: 'json',
+
+                data: function (params) {
+                    params.page = params.page || 1;
+                    return {
+                        searchTerm: params.term,
+                        pageSize: pageSize,
+                        pageNumber: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: data.Results,
+                        pagination: {
+                            more: (params.page * pageSize) < data.Total
+                        }
+                    };
+                }
+            },
+            //placeholder: "-- Select City--",
+            minimumInputLength: 0,
+            allowClear: true,
+            //dropdownParent: $(".mySelect")
+        });
+    })
+    //$(document).on('keydown',function (event) {
+    //    if (event.altKey && event.keyCode === 83) {
+    //        $('#popupForm').submit();
+    //    }
+    //})
+    $('#popupForm').on('submit', function (e) {
+        e.preventDefault();
+        if (!$("#popupForm").valid()) {
+            return false;
+        }
+        $('#btn_Save').attr('disabled', 'disabled');
+        $('#btn_Save').html("<i class='fa fa-refresh fa-spin'></i> &nbsp; Processing...");
+
+
+        var labelId = $('#HiddenRegionId').val();
+
+        var labelName = $('#RegionName').val();
+
+
+
+
+
+        var st =
+        {
+            RegionId: labelId,
+
+            RegionName: labelName,
+
+
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Region/InsertUpdateRegion/",
+            data: st,
+            dataType: 'json',
+            success: function (data) {
+                $('#btn_Save').html("Save");
+                if (data.status) {
+
+                    $('#MyModal').animate({ scrollTop: 0 }, 'fast');
+                    $('.alertDiv').html('<div class="alert alert-success" id="success-alert" style="">' +
+                        '<button type="button" class="close" data-dismiss="alert">x</button>' +
+
+                        '<strong>Success! </strong>' +
+                        'Region Saved Succesfully.' +
+                        '</div>');
+                    $("#success-alert").fadeTo(1000, 500).slideUp(500, function () {
+                        $("#success-alert").slideUp(500);
+                        $('.alertDiv').html('');
+                        $('.close').click();
+                        oTable.ajax.reload(null, false);
+                        $('#txtSearch').focus();
+                    });
+                }
+                else {
+
+                    $('#btn_Save').prop('disabled', false);
+                    alert(data.message);
+                }
+            }
+        })
+    })
+
+
+
+    function SaveForm() {
+
+    }
+
+
+
+
+</script>
