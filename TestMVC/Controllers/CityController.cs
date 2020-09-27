@@ -15,6 +15,7 @@ namespace TestMVC.Controllers
         
         public ActionResult CityIndex()
         {
+	int a = 0 ;
             return View();
         }
         public ActionResult GetAllCities()
