@@ -15,7 +15,7 @@ namespace TestMVC.Controllers
         TestDbEntities db = new TestDbEntities();
         public ActionResult Index()
         {
-            int a = 0;
+           
             return View();
         }
         public ActionResult GetAllRegions()
